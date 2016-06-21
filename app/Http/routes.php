@@ -14,4 +14,6 @@
 Route::auth();
 
 Route::get('/', ['as' => 'root', 'uses' => 'HomeController@index']);
-Route::get('/view/{id}', ['as' => 'view', 'uses' => 'HomeController@view']);
+Route::get('/view/{post_id}', ['as' => 'view', 'uses' => 'HomeController@view']);
+
+Route::post('/comments', ['as' => 'create_comment', 'uses' => 'CommentsController@create']);

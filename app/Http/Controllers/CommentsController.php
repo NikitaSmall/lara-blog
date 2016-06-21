@@ -17,4 +17,17 @@ class CommentsController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function create(Request $request) {
+      $this->validate($request, [
+        'body' => 'required',
+      ]);
+
+      $request->user()->comments()->create([
+        'body' => $request->body,
+        'post_id' => $request->post_id,
+      ]);
+
+      return redirect('/view/' . $request->post_id);
+    }
 }

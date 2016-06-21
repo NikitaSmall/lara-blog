@@ -22,7 +22,11 @@ class HomeController extends Controller
       ]);
     }
 
-    public function view(Request $request) {
-      return view('home.post');
+    public function view($post_id) {
+      $post = Post::findOrFail($post_id);
+      
+      return view('home.post', [
+        'post' => $post,
+      ]);
     }
 }
