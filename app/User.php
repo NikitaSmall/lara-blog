@@ -35,4 +35,20 @@ class User extends Authenticatable
     public function comments() {
       return $this->hasMany(Comment::class);
     }
+
+    public function isAdmin() {
+      if ($this->role->name == 'admin') {
+        return true;
+      }
+
+      return false;
+    }
+
+    public function isModerator() {
+      if ($this->role->name == 'moderator') {
+        return true;
+      }
+
+      return false;
+    }
 }
