@@ -45,12 +45,15 @@
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
-              @if(Auth::user()->isAdmin())
+
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ route('admin.users') }}">Users</a></li>
+                    @if(Auth::user()->isAdmin())
+                      <li><a href="{{ route('admin.users') }}">Users</a></li>
+                    @endif
+                    <li><a href="{{ route('admin.comments') }}">Comments</a></li>
                 </ul>
-              @endif
+
 
               <!-- Right Side Of Navbar -->
               <ul class="nav navbar-nav navbar-right">

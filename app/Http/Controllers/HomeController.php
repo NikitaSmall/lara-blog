@@ -6,6 +6,7 @@ use App\Post;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Comment;
 
 class HomeController extends Controller
 {
@@ -24,9 +25,11 @@ class HomeController extends Controller
 
     public function view($post_id) {
       $post = Post::findOrFail($post_id);
+      $comments = Comment::where('visible', 1)->where('post_id', $post->id)->get();
 
       return view('home.post', [
         'post' => $post,
+        'comments' => $comments,
       ]);
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Comment;
 
 class CommentsController extends Controller
 {
@@ -29,5 +30,22 @@ class CommentsController extends Controller
       ]);
 
       return redirect('/view/' . $request->post_id);
+    }
+
+    public function index() {
+      $comments = Comment::all();
+
+      return view('comments.index', [
+        'comments' => $comments,
+      ]);
+    }
+
+    public function change_status($id) {
+      $comment = Comment::find($id);
+      $comment->update([
+        'visible' => !$comment->visible,
+      ]);
+
+      return redirect('/admin/comments');
     }
 }

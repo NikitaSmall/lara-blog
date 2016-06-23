@@ -32,7 +32,7 @@
           <h2>
               Comments:
           </h2>
-          @foreach($post->comments as $comment)
+          @foreach($comments as $comment)
             <p>
               <span class="glyphicon glyphicon-time"></span>
               Posted on {{ date('F d, Y, H:i', strtotime($comment->created_at)) }}

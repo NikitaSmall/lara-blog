@@ -15,6 +15,20 @@
               <img style="max-height: 300px;" src="{{ $user->image ?: '/images/default.png' }}" alt="user-profile" class="img-thumbnail">
             </div>
 
+            <div>
+              <label>
+                Your's posts:
+              </label>
+
+              <ul>
+                @foreach($user->posts as $post)
+                  <li class="list-item">
+                    <a href="{{ route('view', $post->id) }}">{{ $post->title }}</a>
+                  </li>
+                @endforeach
+              </ul>
+            </div>
+
             <br>
 
             @include('errors.common')
