@@ -16,6 +16,9 @@ Route::auth();
 Route::get('/', ['as' => 'root', 'uses' => 'HomeController@index']);
 Route::get('/view/{post_id}', ['as' => 'view', 'uses' => 'HomeController@view']);
 
+Route::get('/profile', ['as' => 'profile', 'uses' => 'HomeController@profile']);
+Route::put('/profile/change', ['as' => 'change_profile', 'uses' => 'HomeController@change_profile']);
+
 Route::post('/comments', ['as' => 'create_comment', 'uses' => 'CommentsController@create']);
 
 Route::group(['prefix' => 'admin'], function () {

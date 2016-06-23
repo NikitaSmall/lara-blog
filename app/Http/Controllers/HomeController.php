@@ -24,9 +24,55 @@ class HomeController extends Controller
 
     public function view($post_id) {
       $post = Post::findOrFail($post_id);
-      
+
       return view('home.post', [
         'post' => $post,
       ]);
+    }
+
+    public function profile(Request $request) {
+      $user = $request->user();
+
+      return view('home.profile', [
+        'user' => $user,
+      ]);
+    }
+
+    public function change_profile(Request $request) {
+      $user = $request->user();
+
+      if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $extension = $image->getClientOriginalExtension();
+        $fileName = rand(11111,99999) . '.' . $extension;
+
+        $image->move($user->imagePath(), $fileName);
+
+        $user->update([
+          'image' => $user->imagePath() . '/' . $fileName,
+        ]);
+      }
+
+      if ($request->name && !empty($request->name) && ($request->name != $user->name)) {
+        $this->validate($request, [
+          'name' => 'required|max:255|unique:users',
+        ]);
+
+        $user->update([
+          'name' => $request->name,
+        ]);
+      }
+
+      if ($request->pass && !empty($request->pass)) {
+        $this->validate($request, [
+          'pass' => 'required|confirmed|max:255|min:6',
+        ]);
+
+        $user->update([
+          'password' => bcrypt($request->pass),
+        ]);
+      }
+
+      return redirect('/profile');
     }
 }

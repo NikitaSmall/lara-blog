@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password'
+        'name', 'email', 'password', 'image'
     ];
 
     /**
@@ -71,5 +71,9 @@ class User extends Authenticatable
 
       $this->role_id = $adminRole->id;
       $this->save();
+    }
+
+    public function imagePath() {
+      return 'images/uploaded';
     }
 }
