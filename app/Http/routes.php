@@ -23,4 +23,10 @@ Route::group(['prefix' => 'admin'], function () {
   Route::resource('posts', 'PostsController');
 
   Route::put('/posts/change_status/{id}', ['as' => 'admin.posts.change_status', 'uses' => 'PostsController@change_status']);
+
+  Route::get('/users', ['as' => 'admin.users', 'uses' => 'UsersController@index']);
+
+  Route::put('/users/{id}/to_user', ['as' => 'admin.users.to_user', 'uses' => 'UsersController@to_user']);
+  Route::put('/users/{id}/to_moderator', ['as' => 'admin.users.to_moderator', 'uses' => 'UsersController@to_moderator']);
+  Route::put('/users/{id}/to_admin', ['as' => 'admin.users.to_admin', 'uses' => 'UsersController@to_admin']);
 });

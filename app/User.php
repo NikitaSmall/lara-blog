@@ -51,4 +51,25 @@ class User extends Authenticatable
 
       return false;
     }
+
+    public function makeModerator() {
+      $moderatorRole = Role::where('name', 'moderator')->first();
+
+      $this->role_id = $moderatorRole->id;
+      $this->save();
+    }
+
+    public function makeUser() {
+      $userRole = Role::where('name', 'user')->first();
+
+      $this->role_id = $userRole->id;
+      $this->save();
+    }
+
+    public function makeAdmin() {
+      $adminRole = Role::where('name', 'admin')->first();
+
+      $this->role_id = $adminRole->id;
+      $this->save();
+    }
 }

@@ -48,7 +48,7 @@
               @if(Auth::user()->isAdmin())
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ route('admin') }}">Users</a></li>
+                    <li><a href="{{ route('admin.users') }}">Users</a></li>
                 </ul>
               @endif
 
